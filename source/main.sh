@@ -36,6 +36,25 @@ function sh_get_arg()
 }
 
 ##------------------------------------------------------------------------------
+function sh_find_arg() 
+{
+    ## @brief: Checks if the argument was found on the input.
+    ## @param: $1 - Flag to be searched.
+    ## @return: The flag value if found, emptry string otherwise.
+    ## @example: $(sh_find_arg "--force" $@);
+
+    local flag="$1"; shift;
+
+    for i in $(seq 1 $#); do
+        if [ "$1" == "$flag" ]; then
+            shift; echo $flag;
+            return;
+        fi;
+        shift;
+    done;
+}
+
+##------------------------------------------------------------------------------
 function sh_get_file_extension()
 {
     ## @brief: Returns the file extension if exists...
